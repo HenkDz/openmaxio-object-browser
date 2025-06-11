@@ -15,7 +15,7 @@ COPY web-app/ ./
 RUN yarn build
 
 # Build stage for backend
-FROM golang:1.21.8-alpine AS backend-builder
+FROM golang:1.23-alpine AS backend-builder
 WORKDIR /app
 
 # Download Go modules using cache layer
