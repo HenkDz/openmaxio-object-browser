@@ -5,7 +5,7 @@ WORKDIR /app/web-app
 # Install JS dependencies using BuildKit cache for faster subsequent builds
 COPY web-app/package.json web-app/yarn.lock ./
 RUN --mount=type=cache,target=/root/.cache/yarn \
-    corepack enable && yarn install --frozen-lockfile --prefer-offline
+    corepack enable && yarn install --immutable --immutable-cache
 
 # Build React static assets
 COPY web-app/ ./
