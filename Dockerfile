@@ -12,6 +12,7 @@ RUN --mount=type=cache,target=/root/.cache/yarn \
 
 # Build React static assets
 COPY web-app/ ./
+RUN yarn install --immutable --check-cache
 RUN yarn build
 
 # Build stage for backend
