@@ -8,7 +8,7 @@ RUN apk add --no-cache git
 # Install JS dependencies using BuildKit cache for faster subsequent builds
 COPY web-app/package.json web-app/yarn.lock ./
 RUN --mount=type=cache,target=/root/.cache/yarn \
-    corepack enable && yarn install --immutable --immutable-cache
+    corepack enable && corepack prepare yarn@4.4.0 --activate && yarn install --immutable --immutable-cache
 
 # Build React static assets
 COPY web-app/ ./
