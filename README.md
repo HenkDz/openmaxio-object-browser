@@ -1,39 +1,4 @@
-# To build you own OpenMaxIO UI: 
-
-```bash
-git clone https://github.com/OpenMaxIO/openmaxio-object-browser 
-cd openmaxio-object-browser/web-app 
-yarn install 
-yarn build 
-cd ../
-make console 
-./console server 
-```
-
-# To connect OpenMaxIO UI to an existing Minio server run this command (replace 1.2.3.4:9000 to your address)
-
-```bash
-CONSOLE_MINIO_SERVER=http://1.2.3.4:9000 ./console server 
-```
-
-# OpenMaxIO Console
-
-This is a fork of MinIO Console. 
-This is a communitty driven project and is not affiliated with MinIO, Inc. 
-
-OpenMaxIO is a community-maintained fork of MinIO, created in response to the removal of key features from the MinIO open-source distribution. Our goal is simple:
-to preserve a fully open, fully functional, and production-grade object storage server that stays true to the original spirit of minimalism, performance, and freedom.
-
-MinIO once stood for minimal, high-performance, open-source object storage. But recent changes have shifted core capabilities behind a commercial license. We believe the open-source ecosystem deserves better.
-
-OpenMaxIO brings back what was removed and keeps it open for good.
-
-
-## Contributing
-
-We welcome contributions to OpenMaxIO Console. These are still early days, so please be patient as we work to restore and enhance the features you love.
-
-
+# MinIO Console
 
 ![build](https://github.com/minio/console/workflows/Go/badge.svg) ![license](https://img.shields.io/badge/license-AGPL%20V3-blue)
 
@@ -250,4 +215,3 @@ The detailed logging also includes all request and response headers (if any).
 # Contribute to console Project
 
 Please follow console [Contributor's Guide](https://github.com/minio/console/blob/master/CONTRIBUTING.md)
-

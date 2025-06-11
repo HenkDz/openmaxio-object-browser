@@ -80,7 +80,6 @@ export const usersAccessKeyInput = Selector("#accesskey-input");
 export const usersSecretKeyInput = Selector("#standard-multiline-static");
 export const groupNameInput = Selector("#group-name");
 export const searchResourceInput = Selector("#search-resource");
-export const filterBuckets = Selector("#filter-buckets");
 export const filterUserInput = searchResourceInput.withAttribute(
   "placeholder",
   "Filter Users",
@@ -208,10 +207,3 @@ export const locationEmpty = Selector("div").withAttribute(
 // Login Window
 //----------------------------------------------------
 export const loginButton = Selector("button").withAttribute("id", "do-login");
-//----------------------------------------------------
-// Ackwnowledge Button
-//----------------------------------------------------
-export const acknowledgeButton = Selector("button").withAttribute(
-  "id",
-  "acknowledge-confirm",
-);

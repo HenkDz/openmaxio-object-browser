@@ -149,25 +149,28 @@ func Test_validateUserAgainstIDP(t *testing.T) {
 }
 
 func Test_getAccountInfo(t *testing.T) {
+	client := AdminClientMock{}
 	type args struct {
-		ctx context.Context
+		ctx    context.Context
+		client MinioAdmin
 	}
 	tests := []struct {
 		name     string
 		args     args
 		want     *iampolicy.Policy
 		wantErr  bool
-		mockFunc func(client *AdminClientMock)
+		mockFunc func()
 	}{
 		{
 			name: "error getting account info",
 			args: args{
-				ctx: context.Background(),
+				ctx:    context.Background(),
+				client: client,
 			},
 			want:    nil,
 			wantErr: true,
-			mockFunc: func(client *AdminClientMock) {
-				client.minioAccountInfoMock = func(_ context.Context) (madmin.AccountInfo, error) {
+			mockFunc: func() {
+				minioAccountInfoMock = func(_ context.Context) (madmin.AccountInfo, error) {
 					return madmin.AccountInfo{}, errors.New("something went wrong")
 				}
 			},
@@ -175,11 +178,10 @@ func Test_getAccountInfo(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(_ *testing.T) {
-			client := AdminClientMock{}
 			if tt.mockFunc != nil {
-				tt.mockFunc(&client)
+				tt.mockFunc()
 			}
-			got, err := getAccountInfo(tt.args.ctx, client)
+			got, err := getAccountInfo(tt.args.ctx, tt.args.client)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("getAccountInfo() error = %v, wantErr %v", err, tt.wantErr)
 				return

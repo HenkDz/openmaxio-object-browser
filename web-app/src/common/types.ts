@@ -36,6 +36,11 @@ export interface ErrorResponseHandler {
   statusCode?: number;
 }
 
+export interface IBytesCalc {
+  total: number;
+  unit: string;
+}
+
 interface IEmbeddedCustomButton {
   backgroundColor: string;
   textColor: string;
@@ -91,4 +96,9 @@ export interface IEmbeddedCustomStyles {
   regularButtonStyles: IEmbeddedCustomButton;
   inputBox: IEmbeddedInputBox;
   switch: IEmbeddedSwitch;
+}
+
+export interface SelectorTypes {
+  label: any;
+  value: string;
 }

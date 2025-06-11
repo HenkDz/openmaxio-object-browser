@@ -232,10 +232,7 @@ const AddTagModal = ({
                         return (
                           <SecureComponent
                             key={`chip-${index}`}
-                            scopes={[
-                              IAM_SCOPES.S3_DELETE_OBJECT_TAGGING,
-                              IAM_SCOPES.S3_DELETE_ACTIONS,
-                            ]}
+                            scopes={[IAM_SCOPES.S3_DELETE_OBJECT_TAGGING]}
                             resource={bucketName}
                             errorProps={{
                               deleteIcon: null,

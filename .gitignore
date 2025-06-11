@@ -48,6 +48,3 @@ public.crt
 *.code-workspace
 *~
 .eslintcache
-
-# Ignore Bin files
-bin/
