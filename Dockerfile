@@ -2,6 +2,9 @@
 FROM node:20-alpine AS frontend-builder
 WORKDIR /app/web-app
 
+# Git is required for some dependencies pulled from repositories
+RUN apk add --no-cache git
+
 # Install JS dependencies using BuildKit cache for faster subsequent builds
 COPY web-app/package.json web-app/yarn.lock ./
 RUN --mount=type=cache,target=/root/.cache/yarn \
