@@ -1121,13 +1121,12 @@ LabelsWaitLoop:
 				if inStep != nil && *inStep > 0 {
 					step = *inStep
 				}
-
-				if inStart != nil && inEnd != nil {
-					extraParamters = fmt.Sprintf("&start=%d&end=%d", *inStart, *inEnd)
-				}
-
 				if step > 0 {
 					extraParamters = fmt.Sprintf("%s&step=%d", extraParamters, step)
+				}
+
+				if inStart != nil && inEnd != nil {
+					extraParamters = fmt.Sprintf("&start=%d&end=%d&step=%d", *inStart, *inEnd, *inStep)
 				}
 
 				// replace the `$__rate_interval` global for step with unit (s for seconds)

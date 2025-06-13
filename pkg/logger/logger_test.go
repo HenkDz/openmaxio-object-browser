@@ -20,18 +20,24 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"net/http/httptest"
 	"os"
 	"testing"
 )
 
-type testServer struct{}
-
-func (t *testServer) ServeHTTP(_ http.ResponseWriter, _ *http.Request) {
+func testServer(_ http.ResponseWriter, _ *http.Request) {
 }
 
 func TestInitializeLogger(t *testing.T) {
-	srv := httptest.NewServer(&testServer{}) // use a random port
+	testServerWillStart := make(chan interface{})
+	http.HandleFunc("/", testServer)
+	go func() {
+		close(testServerWillStart)
+		err := http.ListenAndServe("127.0.0.1:1337", nil)
+		if err != nil {
+			return
+		}
+	}()
+	<-testServerWillStart
 
 	loggerWebhookEnable := fmt.Sprintf("%s_TEST", EnvLoggerWebhookEnable)
 	loggerWebhookEndpoint := fmt.Sprintf("%s_TEST", EnvLoggerWebhookEndpoint)
@@ -79,7 +85,7 @@ func TestInitializeLogger(t *testing.T) {
 			wantErr: false,
 			setEnvVars: func() {
 				os.Setenv(loggerWebhookEnable, "on")
-				os.Setenv(loggerWebhookEndpoint, srv.URL+"/logger")
+				os.Setenv(loggerWebhookEndpoint, "http://127.0.0.1:1337/logger")
 				os.Setenv(loggerWebhookAuthToken, "test")
 				os.Setenv(loggerWebhookClientCert, "")
 				os.Setenv(loggerWebhookClientKey, "")
@@ -127,7 +133,7 @@ func TestInitializeLogger(t *testing.T) {
 			wantErr: false,
 			setEnvVars: func() {
 				os.Setenv(auditWebhookEnable, "on")
-				os.Setenv(auditWebhookEndpoint, srv.URL+"/audit")
+				os.Setenv(auditWebhookEndpoint, "http://127.0.0.1:1337/audit")
 				os.Setenv(auditWebhookAuthToken, "test")
 				os.Setenv(auditWebhookClientCert, "")
 				os.Setenv(auditWebhookClientKey, "")

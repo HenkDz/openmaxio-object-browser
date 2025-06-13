@@ -221,7 +221,7 @@ export const ldapFormFields = {
     },
     label: "User DN Search Filter",
     tooltip: "",
-    placeholder: "(sAMAccountName=%s)",
+    placeholder: "(sAMAcountName=%s)",
     type: "text",
     editOnly: false,
   },

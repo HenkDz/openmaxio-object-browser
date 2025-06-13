@@ -122,7 +122,6 @@ import TooltipWrapper from "../../../../Common/TooltipWrapper/TooltipWrapper";
 import ListObjectsTable from "./ListObjectsTable";
 import FilterObjectsSB from "../../../../ObjectBrowser/FilterObjectsSB";
 import AddAccessRule from "../../../BucketDetails/AddAccessRule";
-import { sanitizeFilePath } from "./utils";
 
 const DeleteMultipleObjects = withSuspense(
   React.lazy(() => import("./DeleteMultipleObjects")),
@@ -507,7 +506,7 @@ const ListObjects = () => {
 
             const blobFile = new Blob([file], { type: file.type });
 
-            const filePath = sanitizeFilePath(get(file, "path", ""));
+            const filePath = get(file, "path", "");
             const fileWebkitRelativePath = get(file, "webkitRelativePath", "");
 
             let relativeFolderPath = folderPath;

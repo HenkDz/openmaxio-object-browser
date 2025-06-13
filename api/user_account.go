@@ -58,7 +58,6 @@ func getChangePasswordResponse(session *models.Principal, params accountApi.Acco
 	ctx, cancel := context.WithCancel(params.HTTPRequest.Context())
 	defer cancel()
 	clientIP := getClientIP(params.HTTPRequest)
-	client := GetConsoleHTTPClient(clientIP)
 
 	// changePassword operations requires an AdminClient initialized with parent account credentials not
 	// STS credentials
@@ -80,7 +79,7 @@ func getChangePasswordResponse(session *models.Principal, params accountApi.Acco
 	}
 	// user credentials are updated at this point, we need to generate a new admin client and authenticate using
 	// the new credentials
-	credentials, err := getConsoleCredentials(accessKey, newSecretKey, client)
+	credentials, err := getConsoleCredentials(accessKey, newSecretKey, clientIP)
 	if err != nil {
 		return nil, ErrorWithContext(ctx, ErrInvalidLogin, nil, err)
 	}
